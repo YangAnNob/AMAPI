@@ -5,8 +5,6 @@ import re
 import aiohttp
 import asyncio
 
-from db.elastic import es
-
 
 logger = logging.getLogger(__name__)
 
@@ -646,7 +644,6 @@ class AppleMusicAPI:
                 if result:  # 非空
                     try:
                         results.append(result)
-                        await es.insert_apple_music(result)
                     except Exception as e:
                         logger.error(f"处理或保存Apple Music搜索结果时出错: {e}, 数据ID: {result.get('object_id', 'unknown')}")
                         
